@@ -1,0 +1,16 @@
+- hosts: localhost
+  gather_facts: true
+  connection: local
+  tasks:
+   - name: Gather VM facts
+     vmware_guest_facts:
+       datacenter: ha-datacenter
+       hostname: 192.168.10.227
+       username: root
+       password: openstack
+       validate_certs: no
+       name: master
+     delegate_to: localhost
+     register: facts
+   - name: print
+     debug: var=facts
